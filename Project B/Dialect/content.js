@@ -19,7 +19,7 @@ function preload() {
 
     imageP = loadImage("Cities/Pingdingshan/image.jpg");
     imageC = loadImage("Cities/Chengdu/eggcake.jpg");
-    imageL = loadImage("Cities/Lanzhou/img.jpg");
+    imageL = loadImage("Cities/Lanzhou/img.JPG");
     imageG = loadImage("Cities/Guangzhou/img.jpg");
     imageK = loadImage("Cities/Kunming/image.jpg");
     imageZ = loadImage("Cities/Zhoushan/image.jpg")
@@ -141,7 +141,7 @@ class Dictionary {
         this.storyP = "My hometown has a special\nmutton soup. It is very delicious.\nYou are welcome to taste it!"
         this.storyK = "Cangshan and Erhai make people drunk. Dali's Shengpi is crisp and fragrant. The Rushan made by my mother smells like milk."
         this.storyC = "Danhonggao is one kind of Chengdu traditional snack foods. My favorite flavor is creamy meat floss."
-        this.storyL = "Lanzhou specialties are "
+        this.storyL = "Lanzhou specialties are the\nThirty-two bridges on the Yellow River and very delicious beef noodles."
         //this.storyS = "Mung bean soup"
         this.storyG = "Char siu"
         //this.storyW = "Yiwu High School"
