@@ -39,11 +39,11 @@ function preload() {
     zaijianL = loadSound("Cities/Lanzhou/zaijian.m4a");
 
     chifanG = loadSound("Cities/Guangzhou/chifan.mp3");
-    //nihaoG = loadSound("Cities/Guangzhou/nihao.mp3");
+    nihaoG = loadSound("Cities/Guangzhou/nihao.mp3");
     shuijiaoG = loadSound("Cities/Guangzhou/shuijiao.mp3");
     woG = loadSound("Cities/Guangzhou/wo.mp3");
-    //xiexieG = loadSound("Cities/Guangzhou/xiexie.mp3");
-    //zaijianG = loadSound("Cities/Guangzhou/zaijian.mp3");
+    xiexieG = loadSound("Cities/Guangzhou/xiexie.mp3");
+    zaijianG = loadSound("Cities/Guangzhou/zaijian.mp3");
 
     chifanK = loadSound("Cities/Kunming/chifan.m4a");
     nihaoK = loadSound("Cities/Kunming/nihao.m4a");
@@ -118,14 +118,18 @@ class Dictionary {
         this.cityY = [497, 595, 560, 487, 450, 420]; //, 529, 480
         this.images = [imageZ, imageG, imageK, imageC, imageP, imageL]; //, 0, 0
         this.sounds = [soundZ, soundG, soundK, soundC, soundP, soundL]; //, 0, 0
+        this.wordNum = 0;
+        this.indexWord = 0;
+        //this.city = this.sounds[this.indexWord];//!!!
+        //this.cityWord = this.city[this.wordNum];//!!!
         this.storiesPlay = 0;
         this.index = 0;
         this.bigmap = false;
         this.show = false;
         this.showName = "";
 
-        this.speakerX = [1920, 1920, 2400, 2400, 2400, 2400]; //, 1920, 1920
-        this.speakerY = [640, 1540, 640, 940, 1240, 1540]; //, 940, 1240
+        this.speakerX = [960, 960, 960, 960, 1200, 1200]; //, 1920, 1920
+        this.speakerY = [320, 470, 620, 770, 320, 470]; //, 940, 1240
         this.wordPlay = 0;
         this.playword = false;
         this.word = false;
@@ -133,7 +137,7 @@ class Dictionary {
         this.words = [this.Zhoushan, this.Guangzhou, this.Kunming, this.Chengdu, this.Pingdingshan, this.Lanzhou]; //, this.Wenzhou, this.Suzhou  
         this.Pingdingshan = [woP, nihaoP, xiexieP, zaijianP, chifanP, shuijiaoP]; //a series of words
         this.Lanzhou = [woL, nihaoL, xiexieL, zaijianL, chifanL, shuijiaoL];
-        this.Guangzhou = [woG, woG, woG, woG, chifanG, shuijiaoG]; //之后改一下！
+        this.Guangzhou = [woG, nihaoG, xiexieG, zaijianG, chifanG, shuijiaoG]; 
         this.Zhoushan = [woZ, nihaoZ, xiexieZ, zaijianZ, chifanZ, shuijiaoZ];
         this.Kunming = [woK, nihaoK, xiexieK, zaijianK, chifanK, shuijiaoK];
         this.Chengdu = [woC, nihaoC, xiexieC, zaijianC, chifanC, shuijiaoC];
@@ -244,7 +248,7 @@ class Dictionary {
             if (this.storiesPlay == 1){
                 //this.sounds[this.index].currentTime = 0;
                 this.sounds[this.index].play();
-                this.storiesPlay = 2;
+                this.storiesPlay = 0;
             }
 
             textFont("Courier New");
@@ -254,16 +258,24 @@ class Dictionary {
 
     }
 
+    //press the speaker icon. the corresponding audio is played.
     showword(){
         noStroke();
         if (this.playword == true){
             fill(0, 100, 50);
-            circle(this.cityX[this.index], this.cityY[this.index], 10);
-            console.log(this.playword);
+            circle(this.cityX[this.indexWord], this.cityY[this.indexWord], 10);
         }
+        
+        if (this.playword == true && this.wordPlay ==1){
+            this.city = this.words[this.indexWord];
+            this.city[this.wordNum].play();
+            this.wordPlay = 0;
+        }
+            
     }
 
     wo(){
+        this.wordNum = 0;
         this.word = true;
         if (this.storiesPlay == 2){
             this.sounds[this.index].pause();
@@ -285,6 +297,7 @@ class Dictionary {
     }
 //"", "", "", "", "", "Pingdingshan"
     nihao(){
+        this.wordNum = 1;
         this.map();
         image(Nihao, 890, 130);
         fill(55, 60, 70);
@@ -297,6 +310,7 @@ class Dictionary {
     }
 
     xiexie(){
+        this.wordNum = 2;
         this.map();
         scale(0.3);
         image(Xiexie, 3050, 460);
@@ -311,6 +325,7 @@ class Dictionary {
     }
 
     zaijian(){
+        this.wordNum = 3;
         this.map();
         scale(0.3);
         image(Zaijian, 3150, 490);
@@ -325,6 +340,7 @@ class Dictionary {
     }
 
     chifan(){
+        this.wordNum = 4;
         this.map();
         scale(0.07);
         image(Chifan, 13000, 1800);
@@ -339,6 +355,7 @@ class Dictionary {
     }
 
     shuijiao(){
+        this.wordNum = 5;
         this.map();
         scale(0.07);
         image(Shuijiao, 13000, 1800);
@@ -496,7 +513,6 @@ class Dictionary {
     }
 
     turnPage() {
-
         if (this.no == true) {
             noPage.play();
             this.no = false;
@@ -637,9 +653,9 @@ function mousePressed() {
     if (dictionary.word == true){
         for (let i = 0; i < 6; i++){ //8
             if (dist(mouseX, mouseY, dictionary.speakerX[i], dictionary.speakerY[i]) < 75){
-                dictionary.index = i;
+                dictionary.indexWord = i;
                 dictionary.wordPlay = 1;
-                this.playword = true;
+                dictionary.playword = true;
             }
         }
     }
