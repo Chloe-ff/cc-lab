@@ -1,3 +1,56 @@
 body{
     background-color: rgb(148, 71, 148);
 }
+p{
+    color:yellow;
+    font-size: 20px;
+}
+
+.special{
+    text-decoration:underline;
+}
+
+#viw{
+    font-weight: bold;
+    background-color:bisque;
+    position: relative;
+    bottom: 6px;
+    left: 12px;
+}
+
+.textbox{
+    background-color: rgb(177, 218, 205);
+
+    border-style: dotted;
+    border-color: white;
+    border-width: 3px;
+
+    /* pushing stuff away */
+    margin: 10px;
+    /* away from the left */
+    padding: 15px;
+    padding-left: 100px;
+
+    width: 400px;
+}
+
+#p5-canvas-parent{
+    margin-bottom: 100px;
+}
+
+.one{
+    position: absolute;
+    left: 900px;
+    top: 600px;
+}
+
+.three{
+    position: fixed;
+    right: 0px;
+    bottom: 0px;
+}
+
+.two{
+    position: relative;
+    left: 50px;
+}

@@ -1,0 +1,27 @@
+body{
+    background-color: hotpink;
+}
+
+#main{
+    background-color: rgb(148, 71, 148);
+    width: 900px;
+    margin: auto;
+}
+
+h1{
+    background-color:aqua;
+    text-align: center;
+}
+
+#p5-canvas-parent{
+    background-color:blueviolet;
+    text-align: center;
+
+}
+p{
+    /* padding-left: 100px; */
+    /* padding-right: 100px; */
+    background-color: white;
+    width: 50%;
+    margin: auto;
+}
