@@ -1,7 +1,7 @@
 let book;
 
 function preload() {
-  font = loadFont("/resource/Lobster.otf");
+  font = loadFont("resource/Lobster.otf");
   flipSound = loadSound("resource/flip.mp3");
 }
 
