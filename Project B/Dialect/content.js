@@ -124,6 +124,7 @@ class Dictionary {
         //this.cityWord = this.city[this.wordNum];//!!!
         this.storiesPlay = 0;
         this.index = 0;
+        this.lastIndex = 0;
         this.bigmap = false;
         this.show = false;
         this.showName = "";
@@ -133,8 +134,8 @@ class Dictionary {
         this.wordPlay = 0;
         this.playword = false;
         this.word = false;
-        this.wordcount = 0;
-        this.words = [this.Zhoushan, this.Guangzhou, this.Kunming, this.Chengdu, this.Pingdingshan, this.Lanzhou]; //, this.Wenzhou, this.Suzhou  
+        // this.wordcount = 0;
+        // this.words = [this.Zhoushan, this.Guangzhou, this.Kunming, this.Chengdu, this.Pingdingshan, this.Lanzhou]; //, this.Wenzhou, this.Suzhou  
         this.Pingdingshan = [woP, nihaoP, xiexieP, zaijianP, chifanP, shuijiaoP]; //a series of words
         this.Lanzhou = [woL, nihaoL, xiexieL, zaijianL, chifanL, shuijiaoL];
         this.Guangzhou = [woG, nihaoG, xiexieG, zaijianG, chifanG, shuijiaoG]; 
@@ -199,6 +200,10 @@ class Dictionary {
             this.shuijiao();
         }
 
+        if (this.pageNum == 8){
+            this.ending();
+        }
+
         this.turnPage();
     }
 
@@ -258,6 +263,20 @@ class Dictionary {
 
     }
 
+    ending(){
+        this.word = false;
+        fill(55, 60, 70);
+        textFont("Impact");
+        textSize(80);
+        text("E n d", 430, 150);
+        textFont("Courier New");
+        textSize(25);
+        fill(0);   
+        text("Thank you for finishing reading this\ndictionary.\n\nI'm very glad that such wonderful\nlanguage culture doesn't go extinction\nand even be heard by future people\nlike you.\n\nLast but not least, I would like to\nexpress my gratefulness to my parents\nand friends who provided me with the\ndialect record. It is their help that\nmake the Chinese dialects be nvoiced\nforever.", 235, 195);     
+        fill(50, 50, 60);
+        text("Grace (from Pingdingshan)         Jiewei (from Zhoushan)\nDora (from Chengdu)         Yutong (from Kunming)\n\nBenjamin (from Guangzhou)         Yvonne (from Lanzhou)", 235, 500);
+    }
+
     //press the speaker icon. the corresponding audio is played.
     showword(){
         noStroke();
@@ -266,11 +285,27 @@ class Dictionary {
             circle(this.cityX[this.indexWord], this.cityY[this.indexWord], 10);
         }
         
-        // if (this.playword == true && this.wordPlay ==1){
-        //     this.city = this.words[this.indexWord];
-        //     this.city[this.wordNum].play();
-        //     this.wordPlay = 0;
-        // }
+        if (this.playword == true && this.wordPlay ==1){
+            if (this.indexWord == 0){
+                this.Zhoushan[this.wordNum].play();
+            }
+            if (this.indexWord == 1){
+                this.Guangzhou[this.wordNum].play();
+            }
+            if (this.indexWord == 2){
+                this.Kunming[this.wordNum].play();
+            }
+            if (this.indexWord == 3){
+                this.Chengdu[this.wordNum].play();
+            }
+            if (this.indexWord == 4){
+                this.Pingdingshan[this.wordNum].play();
+            }
+            if (this.indexWord == 5){
+                this.Lanzhou[this.wordNum].play();
+            }
+            this.wordPlay = 0;
+        }
             
     }
 
@@ -355,6 +390,7 @@ class Dictionary {
     }
 
     shuijiao(){
+        this.word = true;
         this.wordNum = 5;
         this.map();
         scale(0.07);
@@ -399,7 +435,8 @@ class Dictionary {
 
         scale(2);
     }
-    
+
+
     map() {
         scale(0.6);
         image(mapIMG, this.pageWidth / 2 - 370, 200);
@@ -614,6 +651,25 @@ class Dictionary {
         textFont("Times New Roman");
         text("Next", 1436, 815);
         text("Prev.", 206, 815);
+
+        //page number
+        textFont("Times New Roman");
+        textSize(25);
+        fill(0);
+        text(this.pageNum*2 + 1, 253, 818);
+        if (this.pageNum < 4){
+            text(this.pageNum*2 + 2, 1375, 818);
+        }else{
+            text(this.pageNum*2 + 2, 1362, 818);
+        }
+
+        if (this.pageNum < 5){
+            text("/18", 265, 818);
+        }else{
+            text("/18", 278, 818);
+        }
+        
+        text("/18", 1390, 818);
     }
 
 }
@@ -622,7 +678,7 @@ function mousePressed() {
     let distNext = dist(mouseX, mouseY, 1450, 810);
     let distPrev = dist(mouseX, mouseY, 220, 810);
     if (distNext <= 20) {
-        if (dictionary.pageNum < 7) {
+        if (dictionary.pageNum < 8) {
             //dictionary.no = false;
             dictionary.nextPage = true;
         } else {
@@ -647,7 +703,6 @@ function mousePressed() {
                 dictionary.storiesPlay = 1;
             }
         }
-        //console.log(dictionary.show);
     }
 
     if (dictionary.word == true){
