@@ -21,7 +21,7 @@ function preload() {
     imageC = loadImage("Cities/Chengdu/eggcake.jpg");
     imageL = loadImage("Cities/Lanzhou/image.jpg");
     imageG = loadImage("Cities/Guangzhou/img.jpg");
-    imageK = loadImage("Cities/Kunming/image.jpg");
+    imageK = loadImage("Cities/Kunming/image_new.jpg");
     imageZ = loadImage("Cities/Zhoushan/image.jpg")
 
     Nihao = loadImage("words/nihao.jpg");
@@ -139,13 +139,13 @@ class Dictionary {
         this.Chengdu = [woC, nihaoC, xiexieC, zaijianC, chifanC, shuijiaoC];
 
         this.storyP = "My hometown has a special\nmutton soup. It is very delicious.\nYou are welcome to taste it!"
-        this.storyK = "Cangshan and Erhai make people drunk. Dali's Shengpi is crisp and fragrant. The Rushan made by my mother smells like milk."
-        this.storyC = "Danhonggao is one kind of Chengdu traditional snack foods. My favorite flavor is creamy meat floss."
-        this.storyL = "Lanzhou specialties are the\nThirty-two bridges on the Yellow River and very delicious beef noodles."
+        this.storyK = "Cangshan and Erhai make people\ndrunk. Dali's Shengpi is crisp\nand fragrant. The Rushan made by\nmy mother smells like milk."
+        this.storyC = "Danhonggao is one kind of Chengdu\ntraditional snack foods. My favorite\nflavor is creamy meat floss."
+        this.storyL = "Lanzhou specialties are the\nThirty-two Bridges on the\nYellow River and very delicious\nbeef noodles."
         //this.storyS = "Mung bean soup"
         this.storyG = "Char siu"
         //this.storyW = "Yiwu High School"
-        this.storyZ = "Taohua Island used to be dominated by fishing. Every time the fishing boat came back, it was very busy. Hairtail, pampus, yellow croakeer, inkfish, crab and shrimp are very fresh, making you want to drool."
+        this.storyZ = "Taohua Island used to be dominated\nby fishing. Every time the fishing\nboat came back, it was very busy.\nHairtail, pampus, yellow croakeer,\ninkfish, crab and shrimp are very\nfresh, making you want to drool."
 
         this.stories = [this.storyZ, this.storyG, this.storyK, this.storyC, this.storyP, this.storyL]; //, this.storyW, this.storyS
 
