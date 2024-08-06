@@ -266,11 +266,11 @@ class Dictionary {
             circle(this.cityX[this.indexWord], this.cityY[this.indexWord], 10);
         }
         
-        if (this.playword == true && this.wordPlay ==1){
-            this.city = this.words[this.indexWord];
-            this.city[this.wordNum].play();
-            this.wordPlay = 0;
-        }
+        // if (this.playword == true && this.wordPlay ==1){
+        //     this.city = this.words[this.indexWord];
+        //     this.city[this.wordNum].play();
+        //     this.wordPlay = 0;
+        // }
             
     }
 
