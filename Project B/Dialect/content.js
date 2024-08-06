@@ -8,7 +8,7 @@ function preload() {
     mapIMG = loadImage("resource/China-map.gif");
     flipSound = loadSound("resource/flip.mp3");
     noPage = loadSound("resource/nopage.mp3");
-    font = loadFont("resource/Lobster.otf");
+    font = loadFont("/cc-lab/Project%20B/Dialect/resource/Lobster.otf");
 
     soundP = loadSound("Cities/Pingdingshan/story.m4a");
     soundC = loadSound("Cities/Chengdu/story.m4a");
