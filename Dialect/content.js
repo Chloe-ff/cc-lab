@@ -611,6 +611,7 @@ class Dictionary {
         }
 
         if (this.nextPage == true) {
+            this.pageNum += 1;
             this.playword = false;
             push();
             translate(this.width / 2 + 2 + this.x, this.y - 10);
@@ -633,7 +634,7 @@ class Dictionary {
 
             if (this.flipPlay == 1) {
                 flipSound.play();
-                this.pageNum += 1; //再斟酌一下下一页内容出现的时机
+                //this.pageNum += 1; //再斟酌一下下一页内容出现的时机
             }
 
             pop();
@@ -646,6 +647,7 @@ class Dictionary {
         }
 
         if (this.prevPage == true) {
+            this.pageNum -= 1;
             this.playword = false;
             push();
             translate(this.width / 2 + 2 + this.x, this.y - 10);
@@ -664,7 +666,7 @@ class Dictionary {
 
             if (this.flipPlay == 1) {
                 flipSound.play();
-                this.pageNum -= 1;
+                //this.pageNum -= 1;
             }
 
             pop();
