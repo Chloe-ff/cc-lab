@@ -20,7 +20,7 @@ function preload() {
     imageP = loadImage("Cities/Pingdingshan/image.jpg");
     imageC = loadImage("Cities/Chengdu/eggcake.jpg");
     imageL = loadImage("Cities/Lanzhou/image.jpg");
-    imageG = loadImage("Cities/Guangzhou/img.jpg");
+    imageG = loadImage("Cities/Guangzhou/image.jpg");
     imageK = loadImage("Cities/Kunming/image_new.jpg");
     imageZ = loadImage("Cities/Zhoushan/image.jpg")
 
