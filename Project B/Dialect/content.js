@@ -12,7 +12,7 @@ function preload() {
 
     soundP = loadSound("Cities/Pingdingshan/story.m4a");
     soundC = loadSound("Cities/Chengdu/story.m4a");
-    soundG = loadSound("Cities/Guangzhou/story.mp3");
+    soundG = loadSound("Cities/Guangzhou/story_new.mp3");
     soundK = loadSound("Cities/Kunming/story.m4a");
     soundL = loadSound("Cities/Lanzhou/story.m4a");
     soundZ = loadSound("Cities/Zhoushan/story.mp3");
@@ -100,10 +100,12 @@ class Dictionary {
         this.pageWidth = this.width / 2 - 57;
         this.pageHeight = 805;
 
+        //the lines that show the hidden pages
         this.lineX = this.x + 28;
         this.lineY = this.y + 30;
         this.lineHeight = 770;
 
+        //about pages
         this.nextPage = false;
         this.prevPage = false;
         this.leftPage = false;
@@ -112,10 +114,17 @@ class Dictionary {
         this.pageNum = 0;
         this.no = false;
 
+        //control the color of the twinkling circle
+        this.color = 0;
+        this.colorChange = 2;
+        this.circleSize = 25;
+        this.sizeChange = 1;
 
         this.cities = ["Zhoushan", "Guangzhou", "Kunming", "Chengdu", "Pingdingshan", "Lanzhou"]; //, "Wenzhou", "Suzhou" (第二位)
         this.cityX = [692, 608, 495, 510, 612, 505]; //, 673, 680
         this.cityY = [497, 595, 560, 487, 450, 420]; //, 529, 480
+        this.labelX = [692, 608, 495, 510, 612, 505];
+        this.labelY = [467, 565, 530, 457, 420, 390];
         this.images = [imageZ, imageG, imageK, imageC, imageP, imageL]; //, 0, 0
         this.sounds = [soundZ, soundG, soundK, soundC, soundP, soundL]; //, 0, 0
         this.wordNum = 0;
@@ -124,44 +133,39 @@ class Dictionary {
         //this.cityWord = this.city[this.wordNum];//!!!
         this.storiesPlay = 0;
         this.index = 0;
-        this.lastIndex = 0;
+        this.currentPlay = 0;
         this.bigmap = false;
         this.show = false;
         this.showName = "";
 
-        this.speakerX = [960, 960, 960, 960, 1200, 1200]; //, 1920, 1920
-        this.speakerY = [320, 470, 620, 770, 320, 470]; //, 940, 1240
+        this.speakerX = [960, 960, 960, 1200, 1200, 1200]; //, 1920, 1920
+        this.speakerY = [320, 470, 620, 320, 470, 620]; //, 940, 1240
         this.wordPlay = 0;
         this.playword = false;
         this.word = false;
         // this.wordcount = 0;
         // this.words = [this.Zhoushan, this.Guangzhou, this.Kunming, this.Chengdu, this.Pingdingshan, this.Lanzhou]; //, this.Wenzhou, this.Suzhou  
-        this.Pingdingshan = [woP, nihaoP, xiexieP, zaijianP, chifanP, shuijiaoP]; //a series of words
+
+        //a series of words
+        this.Pingdingshan = [woP, nihaoP, xiexieP, zaijianP, chifanP, shuijiaoP]; 
         this.Lanzhou = [woL, nihaoL, xiexieL, zaijianL, chifanL, shuijiaoL];
         this.Guangzhou = [woG, nihaoG, xiexieG, zaijianG, chifanG, shuijiaoG]; 
         this.Zhoushan = [woZ, nihaoZ, xiexieZ, zaijianZ, chifanZ, shuijiaoZ];
         this.Kunming = [woK, nihaoK, xiexieK, zaijianK, chifanK, shuijiaoK];
         this.Chengdu = [woC, nihaoC, xiexieC, zaijianC, chifanC, shuijiaoC];
 
+        //stores
         this.storyP = "My hometown has a special\nmutton soup. It is very delicious.\nYou are welcome to taste it!"
         this.storyK = "Cangshan and Erhai make people\ndrunk. Dali's Shengpi is crisp\nand fragrant. The Rushan made by\nmy mother smells like milk."
         this.storyC = "Danhonggao is one kind of Chengdu\ntraditional snack foods. My favorite\nflavor is creamy meat floss."
         this.storyL = "Lanzhou specialties are the\nThirty-two Bridges on the\nYellow River and very delicious\nbeef noodles."
         //this.storyS = "Mung bean soup"
-        this.storyG = "Char siu"
+        this.storyG = "When Cantonese kids are naughty,\nor their mothers get angry, their\nmother will say, 'It's better\nto have Char Siu than you.'\nThis is a way of venting anger."
         //this.storyW = "Yiwu High School"
         this.storyZ = "Taohua Island used to be dominated\nby fishing. Every time the fishing\nboat came back, it was very busy.\nHairtail, pampus, yellow croakeer,\ninkfish, crab and shrimp are very\nfresh, making you want to drool."
 
         this.stories = [this.storyZ, this.storyG, this.storyK, this.storyC, this.storyP, this.storyL]; //, this.storyW, this.storyS
 
-        // this.intro = true;
-        // this.memory = false;
-        // this.dictionary = false;
-
-        // this.turn1X = this.width / 2 + 2 + this.pageWidth;
-        // this.turn1Y = -20;
-        // this.turn2X = this.width / 2 + 2 + this.pageWidth;
-        // this.turn2Y = -20 + this.pageHeight;
     }
 
     update() {
@@ -207,9 +211,10 @@ class Dictionary {
         this.turnPage();
     }
 
+    //the Introduction page
     intro(){
         this.word = false;
-        if (this.storiesPlay == 2){
+        if (this.storiesPlay > 1){
             this.sounds[this.index].pause();
         }
         this.bigmap = false;
@@ -224,9 +229,9 @@ class Dictionary {
         fill(0);
         text("Hi, my dear friend. Hope everyting\ngoes well.\n\nI'm Chloe from 21st century, a very\nlong time ago. I think you probably\nnever imagined life back then. You\nmay also know nothing about Chinese\nDialects.\n\nIf so, this dictionary will give you\na surprise. Given to the possibility\nof forgetting, I collected seven\nChinese Dialects and wrote this\ndictionary in 2024.\n\nHere, you can know the interesting\npronunciations of different Chinese\nDialects. You can also hear some\nstories of the native speakers.", 250, 180);
         text("Their voices, memories and emotions\nhave withstood the test of time and,\nin a sense, constitute eternity.\n\nIf insterested, feel free to open\nthis old dictionary and have a\nwonderful tour!\n\nBest,\nChloe🥹", 900, 180);
-
     }
 
+    //the page that has a big map and tells the local stories
     bigMap(){
         this.word = false;
         this.bigmap = true;
@@ -238,12 +243,18 @@ class Dictionary {
         fill(0)
         textFont("Courier New");
         textSize(25);
-        text("This dictionary collects seven kinds\nof Chinese dialects. They come from\nseven cities. Each of the city is\nrepresented by a red dot on the left\nmap.\n\nBefore turning to the dictionary\nsection, feel free to click these red\ndots and get familiar with the\ncorresponding cities. You will hear\nthe memory and emotions of the natives.", 870, 190);
+        text("This dictionary collects seven kinds\nof Chinese dialects. They come from\nseven cities. Each of the city is\nrepresented by a red dot on the left\nmap.", 870, 190);
+        fill(5, 70, 60);
+        text("Before turning to the dictionary\nsection, feel free to click these red\ndots and get familiar with the\ncorresponding cities.", 870, 370);
+        fill(0);
+        text("                      You will hear\nthe memory and emotions of the natives.", 870, 465);
         
+        //if click, the circle turns red, and the local story is played
         if (this.show == true){
             noStroke();
-            fill(0, 100, 50);
-            circle(this.cityX[this.index], this.cityY[this.index], 10);
+            // fill(0, 100, 50);
+            // circle(this.cityX[this.index], this.cityY[this.index], 10);
+            this.twinkle(this.index);
             fill(0);
             textFont(font);
             text(this.showName, 870, 550);
@@ -252,17 +263,18 @@ class Dictionary {
             scale(5);
             if (this.storiesPlay == 1){
                 //this.sounds[this.index].currentTime = 0;
+                this.currentPlay = this.index;
                 this.sounds[this.index].play();
-                this.storiesPlay = 0;
+                this.storiesPlay += 1;
             }
 
             textFont("Courier New");
             textSize(18);
             text(this.stories[this.index], 1080, 590);
         }
-
     }
-
+    
+    //the ending page
     ending(){
         this.word = false;
         fill(55, 60, 70);
@@ -272,47 +284,80 @@ class Dictionary {
         textFont("Courier New");
         textSize(25);
         fill(0);   
-        text("Thank you for finishing reading this\ndictionary.\n\nI'm very glad that such wonderful\nlanguage culture doesn't go extinction\nand even be heard by future people\nlike you.\n\nLast but not least, I would like to\nexpress my gratefulness to my parents\nand friends who provided me with the\ndialect record. It is their help that\nmake the Chinese dialects be nvoiced\nforever.", 235, 195);     
+        text("Thank you for reading this dictionary.\n\nI'm very glad that such wonderful\nlanguage culture doesn't go extinction\nand even be heard by future people\nlike you.\n\nLast but not least, I would like to\nexpress my gratefulness to my parents\nand friends who provided me with the\ndialect record. It is their help that\nallows the Chinese dialects to be\nvoiced forever.", 235, 195);     
         fill(50, 50, 60);
-        text("Grace (from Pingdingshan)         Jiewei (from Zhoushan)\nDora (from Chengdu)         Yutong (from Kunming)\n\nBenjamin (from Guangzhou)         Yvonne (from Lanzhou)", 235, 500);
+        textSize(20);
+        text("Grace (from Pingdingshan)\nJiewei (from Zhoushan)\nDora (from Chengdu)\nYutong (from Kunming)\nBenjamin (from Guangzhou)\nYvonne (from Lanzhou)", 235, 620);
+        textFont(font);
+        textSize(100);
+        fill(20, 25, 50);
+        text("See You !", 970, 480);
     }
 
-    //press the speaker icon. the corresponding audio is played.
+    //press the speaker icon. the corresponding audio is played. the circle turns red if the corresponding speaker is clicked
     showword(){
         noStroke();
         if (this.playword == true){
-            fill(0, 100, 50);
-            circle(this.cityX[this.indexWord], this.cityY[this.indexWord], 10);
+            // fill(0, 100, 50);
+            // circle(this.cityX[this.indexWord], this.cityY[this.indexWord], 10);
+            this.twinkle(this.indexWord);
         }
         
         if (this.playword == true && this.wordPlay ==1){
             if (this.indexWord == 0){
                 this.Zhoushan[this.wordNum].play();
+                //this.twinkle(this.indexWord);
             }
             if (this.indexWord == 1){
                 this.Guangzhou[this.wordNum].play();
+                //this.twinkle(this.indexWord);
             }
             if (this.indexWord == 2){
                 this.Kunming[this.wordNum].play();
+                //this.twinkle(this.indexWord);
             }
             if (this.indexWord == 3){
                 this.Chengdu[this.wordNum].play();
+                //this.twinkle(this.indexWord);
             }
             if (this.indexWord == 4){
                 this.Pingdingshan[this.wordNum].play();
+                //this.twinkle(this.indexWord);
             }
             if (this.indexWord == 5){
                 this.Lanzhou[this.wordNum].play();
+                //this.twinkle(this.indexWord);
             }
             this.wordPlay = 0;
+            //this.twinkle(this.indexWord);
         }
             
+    }
+
+    twinkle(index){
+        if (this.color < 0 || this.color > 100){
+            this.colorChange = -this.colorChange;
+        }
+        this.color += this.colorChange;
+
+        if (this.circleSize < 10 || this.circleSize > 40){
+            this.sizeChange = -this.sizeChange;
+        }
+        this.circleSize += this.sizeChange;
+
+        fill(10, this.color, 65);
+        circle(this.cityX[index], this.cityY[index], this.circleSize);
+
+        fill(30, 75, 25);
+        textSize(25);
+        textFont(font);
+        text(this.cities[index], this.labelX[index], this.labelY[index]);
     }
 
     wo(){
         this.wordNum = 0;
         this.word = true;
-        if (this.storiesPlay == 2){
+        if (this.storiesPlay > 1){
             this.sounds[this.index].pause();
         }
         this.bigmap = false;
@@ -405,10 +450,12 @@ class Dictionary {
         this.showword();
     }
 
+    //the speaker icons
     icon(){
         textSize(50);
         fill(0);
         scale(0.5);
+
         image(speaker, 1770, 560);
         text("Zhoushan", 2050, 650);
 
@@ -418,14 +465,14 @@ class Dictionary {
         image(speaker, 1770, 1160);
         text("Kunming", 2050, 1250);
 
-        image(speaker, 1770, 1460);
-        text("Chengdu", 2050, 1550);
-
         image(speaker, 2250, 560);
-        text("Pingdingshan", 2530, 650);
+        text("Chengdu", 2530, 650);
 
         image(speaker, 2250, 860);
-        text("Lanzhou", 2530, 950);
+        text("Pingdingshan", 2530, 950);
+
+        image(speaker, 2250, 1160);
+        text("Lanzhou", 2530, 1250);
 
         //image(speaker, 2250, 1160);
         //text("Pingdingshan", 2530, 1250); wenzhou
@@ -434,9 +481,15 @@ class Dictionary {
         //text("Lanzhou", 2530, 1550); suzhou
 
         scale(2);
+
+        //instruction
+        fill(10, 75, 20);
+        textSize(15);
+        text("* Click the speaker to listen the dialects.", 930, 720);
+
     }
 
-
+    //the map on the left pages
     map() {
         scale(0.6);
         image(mapIMG, this.pageWidth / 2 - 370, 200);
@@ -550,6 +603,7 @@ class Dictionary {
     }
 
     turnPage() {
+        //this.playword = false;
         if (this.no == true) {
             noPage.play();
             this.no = false;
@@ -557,6 +611,7 @@ class Dictionary {
         }
 
         if (this.nextPage == true) {
+            this.playword = false;
             push();
             translate(this.width / 2 + 2 + this.x, this.y - 10);
 
@@ -591,6 +646,7 @@ class Dictionary {
         }
 
         if (this.prevPage == true) {
+            this.playword = false;
             push();
             translate(this.width / 2 + 2 + this.x, this.y - 10);
 
@@ -697,6 +753,7 @@ function mousePressed() {
     if (dictionary.bigmap == true){
         for (let i = 0; i < 6; i++){ //8
             if (dist(mouseX, mouseY, dictionary.cityX[i], dictionary.cityY[i]) <= 5){
+                //this.sounds[this.currentPlay].pause();
                 dictionary.show = true;
                 dictionary.showName = dictionary.cities[i];
                 dictionary.index = i;
