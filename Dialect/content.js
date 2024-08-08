@@ -266,7 +266,7 @@ class Dictionary {
         textFont("Courier New");
         textSize(25);
         fill(0);
-        text("Hi, my dear friend. Hope everything\ngoes well.\n\nI'm Chloe from 21st century, a very\nlong time ago. I think you probably\nnever imagined life back then. You\nmay also know nothing about Chinese\nDialects.\n\nIf so, this dictionary will give you\na surprise. Given to the possibility\nof forgetting, I collected seven\nChinese Dialects and wrote this\ndictionary in 2024.\n\nHere, you can know the interesting\npronunciations of different Chinese\nDialects. You can also hear some\nstories of the native speakers.", 250, 180);
+        text("Hi, my dear friend. Hope everything\ngoes well.\n\nI'm Chloe from 21st century, a very\nlong time ago. I think you probably\nnever imagined life back then. You\nmay also know nothing about Chinese\nDialects.\n\nIf so, this dictionary will give you\na surprise. Given to the possibility\nof forgetting, I collected six\nChinese Dialects and wrote this\ndictionary in 2024.\n\nHere, you can know the interesting\npronunciations of different Chinese\nDialects. You can also hear some\nstories of the native speakers.", 250, 180);
         // text("Their voices, memories and emotions\nhave withstood the test of time and,\nin a sense, constitute eternity.\n\nIf insterested, feel free to open\nthis old dictionary and have a\nwonderful tour!\n\nBest,\nChloe🥹", 900, 180);
     }
 
