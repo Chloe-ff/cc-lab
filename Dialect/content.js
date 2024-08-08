@@ -289,7 +289,7 @@ class Dictionary {
         fill(0)
         textFont("Courier New");
         textSize(25);
-        text("This dictionary collects seven kinds\nof Chinese dialects. They come from\nseven cities. Each of the city is\nrepresented by a red dot on the left\nmap.", 870, 190);
+        text("This dictionary collects six kinds\nof Chinese dialects. They come from\nseven cities. Each of the city is\nrepresented by a red dot on the left\nmap.", 870, 190);
         fill(5, 70, 60);
         text("Before turning to the dictionary\nsection, feel free to click these red\ndots and get familiar with the\ncorresponding cities.", 870, 370);
         fill(0);
