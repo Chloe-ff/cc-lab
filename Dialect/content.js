@@ -108,8 +108,9 @@ class Dictionary {
         //about pages
         this.nextPage = false;
         this.prevPage = false;
-        this.leftPage = false;
-        this.rightPage = false;
+        this.leftNum = 0;
+        this.rightNum = 0;
+        //this.changePage = false;
         this.flipPlay = 0;
         this.pageNum = 0;
         this.no = false;
@@ -173,50 +174,125 @@ class Dictionary {
         this.lines();
         this.button();
         //this.map();
-        if (this.pageNum == 0){
-            this.intro();
+
+        // if (this.pageNum == 0){
+        //     this.intro();
+        // }
+        if (this.leftNum == 0){
+            this.introLeft();
         }
 
-        if (this.pageNum == 1){
+        if (this.rightNum == 0){
+            this.introRight();
+        }
+
+        // if (this.pageNum == 1){
+        //     this.bigmap = true;
+        //     this.map();
+        //     this.bigMap();
+        // }
+
+        if (this.leftNum == 1){
+            this.map();
+            this.bigmap = true;
+        }
+
+        if (this.rightNum == 1){
             this.bigMap();
         }
 
-        if (this.pageNum == 2){
+        // if (this.pageNum == 2){
+        //     this.wo();
+        // }
+
+        if (this.leftNum == 2){
+            this.map();
+        }
+
+        if (this.rightNum == 2){
             this.wo();
         }
 
-        if (this.pageNum == 3){
+        // if (this.pageNum == 3){
+        //     this.nihao();
+        // }
+
+        if (this.leftNum == 3){
+            this.map();
+        }
+
+        if (this.rightNum == 3){
             this.nihao();
         }
 
-        if (this.pageNum == 4){
+        // if (this.pageNum == 4){
+        //     this.xiexie();
+        // }
+
+        if (this.leftNum == 4){
+            this.map();
+        }
+
+        if (this.rightNum == 4){
             this.xiexie();
         }
 
-        if (this.pageNum == 5){
+        // if (this.pageNum == 5){
+        //     this.zaijian();
+        // }
+
+        if (this.leftNum == 5){
+            this.map();
+        }
+
+        if (this.rightNum == 5){
             this.zaijian();
         }
 
-        if(this.pageNum == 6){
+        // if(this.pageNum == 6){
+        //     this.chifan();
+        // }
+
+        if (this.leftNum == 6){
+            this.map();
+        }
+
+        if (this.rightNum == 6){
             this.chifan();
         }
 
-        if(this.pageNum == 7){
+        // if(this.pageNum == 7){
+        //     this.shuijiao();
+        // }
+
+        if (this.leftNum == 7){
+            this.map();
+        }
+
+        if (this.rightNum == 7){
             this.shuijiao();
         }
 
-        if (this.pageNum == 8){
-            this.ending();
+        // if (this.pageNum == 8){
+        //     this.ending();
+        // }
+
+        if (this.leftNum == 8){
+            this.endingLeft();
+        }
+
+        if (this.rightNum == 8){
+            this.endingRight();
         }
 
         this.turnPage();
     }
 
     //the Introduction page
-    intro(){
+    introLeft(){
         this.word = false;
         if (this.storiesPlay > 1){
-            this.sounds[this.index].pause();
+            this.sounds[this.index].pause();  //看看要不要改
         }
         this.bigmap = false;
         this.show = false;
@@ -229,14 +305,21 @@ class Dictionary {
         textSize(25);
         fill(0);
         text("Hi, my dear friend. Hope everyting\ngoes well.\n\nI'm Chloe from 21st century, a very\nlong time ago. I think you probably\nnever imagined life back then. You\nmay also know nothing about Chinese\nDialects.\n\nIf so, this dictionary will give you\na surprise. Given to the possibility\nof forgetting, I collected seven\nChinese Dialects and wrote this\ndictionary in 2024.\n\nHere, you can know the interesting\npronunciations of different Chinese\nDialects. You can also hear some\nstories of the native speakers.", 250, 180);
+        // text("Their voices, memories and emotions\nhave withstood the test of time and,\nin a sense, constitute eternity.\n\nIf insterested, feel free to open\nthis old dictionary and have a\nwonderful tour!\n\nBest,\nChloe🥹", 900, 180);
+    }
+
+    introRight(){
+        textFont("Courier New");
+        textSize(25);
+        fill(0);
         text("Their voices, memories and emotions\nhave withstood the test of time and,\nin a sense, constitute eternity.\n\nIf insterested, feel free to open\nthis old dictionary and have a\nwonderful tour!\n\nBest,\nChloe🥹", 900, 180);
     }
 
     //the page that has a big map and tells the local stories
     bigMap(){
         this.word = false;
-        this.bigmap = true;
-        this.map();
+        // this.bigmap = true;
+        // this.map();
         fill(55, 60, 70);
         textFont("Impact");
         textSize(38);
@@ -293,7 +376,7 @@ class Dictionary {
     }
     
     //the ending page
-    ending(){
+    endingLeft(){
         this.word = false;
         fill(55, 60, 70);
         textFont("Impact");
@@ -306,6 +389,13 @@ class Dictionary {
         fill(50, 50, 60);
         textSize(20);
         text("Grace (from Pingdingshan)\nJiewei (from Zhoushan)\nDora (from Chengdu)\nYutong (from Kunming)\nBenjamin (from Guangzhou)\nYvonne (from Lanzhou)", 235, 620);
+        // textFont(font);
+        // textSize(100);
+        // fill(20, 25, 50);
+        // text("See You !", 970, 480);
+    }
+
+    endingRight(){
         textFont(font);
         textSize(100);
         fill(20, 25, 50);
@@ -381,7 +471,7 @@ class Dictionary {
         this.bigmap = false;
         this.show = false;
         this.showName = "";
-        this.map();
+        //this.map();
         scale(0.7);
         image(Wo, 1370, 166);
         scale(10/7);
@@ -396,7 +486,7 @@ class Dictionary {
 //"", "", "", "", "", "Pingdingshan"
     nihao(){
         this.wordNum = 1;
-        this.map();
+        //this.map();
         image(Nihao, 890, 130);
         fill(55, 60, 70);
         textFont(font);
@@ -409,7 +499,7 @@ class Dictionary {
 
     xiexie(){
         this.wordNum = 2;
-        this.map();
+        //this.map();
         scale(0.3);
         image(Xiexie, 3050, 460);
         scale(10/3);
@@ -424,7 +514,7 @@ class Dictionary {
 
     zaijian(){
         this.wordNum = 3;
-        this.map();
+        //this.map();
         scale(0.3);
         image(Zaijian, 3150, 490);
         scale(10/3);
@@ -439,7 +529,7 @@ class Dictionary {
 
     chifan(){
         this.wordNum = 4;
-        this.map();
+        //this.map();
         scale(0.07);
         image(Chifan, 13000, 1800);
         scale(100/7);
@@ -455,7 +545,7 @@ class Dictionary {
     shuijiao(){
         this.word = true;
         this.wordNum = 5;
-        this.map();
+        //this.map();
         scale(0.07);
         image(Shuijiao, 13000, 1800);
         scale(100/7);
@@ -635,6 +725,7 @@ class Dictionary {
             translate(this.width / 2 + 2 + this.x, this.y - 10);
 
             let xs = map(mouseX, this.x + 55 + 2 * this.pageWidth, 55 + this.x, 1, -1);
+            this.xs = xs;
             if (xs > -1 && xs < 1) {
                 scale(xs, 1);
                 fill(40, 15, 90);
@@ -644,6 +735,12 @@ class Dictionary {
             if (xs < 0) {
                 this.flipPlay += 1;
                 this.leftPage = true;
+                this.anotherChange = true;
+            }
+
+            if (this.changePage == true){
+                this.rightNum += 1;
+                this.changePage = false;
             }
 
             // if (this.leftPage == true && xs >0){
@@ -656,13 +753,14 @@ class Dictionary {
 
             if (this.flipPlay == 1) {
                 flipSound.play();
-                this.pageNum += 1; //再斟酌一下下一页内容出现的时机
+                //this.pageNum += 1; //再斟酌一下下一页内容出现的时机
             }
 
             pop();
 
             if (xs < -1) {
                 //flipSound.play();
+                this.leftNum += 1;
                 this.nextPage = false;
                 this.flipPlay = 0;
             }
@@ -683,6 +781,7 @@ class Dictionary {
 
             if (xs > 0) {
                 this.flipPlay += 1;
+                this.anotherChange = true;
                 //flipSound.play();
             }
 
@@ -690,15 +789,21 @@ class Dictionary {
             //     this.pageNum += 1;
             // }
 
+            if (this.changePage == true){
+                this.leftNum -= 1;
+                this.changePage = false;
+            }
+
             if (this.flipPlay == 1) {
                 flipSound.play();
-                this.pageNum -= 1;
+                //this.pageNum -= 1;
             }
 
             pop();
 
             if (xs > 1) {
                 //flipSound.play();
+                this.rightNum -= 1;
                 this.prevPage = false;
                 this.flipPlay = 0;
             }
@@ -740,14 +845,14 @@ class Dictionary {
         textFont("Times New Roman");
         textSize(25);
         fill(0);
-        text(this.pageNum*2 + 1, 253, 818);
-        if (this.pageNum < 4){
-            text(this.pageNum*2 + 2, 1375, 818);
+        text(this.leftNum*2 + 1, 253, 818);
+        if (this.rightNum < 4){
+            text(this.rightNum*2 + 2, 1375, 818);
         }else{
-            text(this.pageNum*2 + 2, 1362, 818);
+            text(this.rightNum*2 + 2, 1362, 818);
         }
 
-        if (this.pageNum < 5){
+        if (this.leftNum < 5){
             text("/18", 265, 818);
         }else{
             text("/18", 278, 818);
@@ -762,17 +867,19 @@ function mousePressed() {
     let distNext = dist(mouseX, mouseY, 1450, 810);
     let distPrev = dist(mouseX, mouseY, 220, 810);
     if (distNext <= 20) {
-        if (dictionary.pageNum < 8) {
+        if (dictionary.rightNum < 8) {
             //dictionary.no = false;
-            dictionary.nextPage = true;;
+            dictionary.nextPage = true;
+            dictionary.changePage = true;
         } else {
             dictionary.no = true;
         }
     }
     if (distPrev <= 20) {
-        if (dictionary.pageNum > 0) {
+        if (dictionary.leftNum > 0) {
             //dictionary.no = false;
             dictionary.prevPage = true;
+            dictionary.changePage = true;
         } else {
             dictionary.no = true;
         }
