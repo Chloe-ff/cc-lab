@@ -110,10 +110,10 @@ class Dictionary {
         this.prevPage = false;
         this.leftNum = 0;
         this.rightNum = 0;
+        this.no = false;
         //this.changePage = false;
         this.flipPlay = 0;
         this.pageNum = 0;
-        this.no = false;
 
         //control the color of the twinkling circle
         this.color = 0;
@@ -173,11 +173,7 @@ class Dictionary {
     update() {
         this.lines();
         this.button();
-        //this.map();
 
-        // if (this.pageNum == 0){
-        //     this.intro();
-        // }
         if (this.leftNum == 0){
             this.introLeft();
         }
@@ -185,12 +181,6 @@ class Dictionary {
         if (this.rightNum == 0){
             this.introRight();
         }
-
-        // if (this.pageNum == 1){
-        //     this.bigmap = true;
-        //     this.map();
-        //     this.bigMap();
-        // }
 
         if (this.leftNum == 1){
             this.map();
@@ -201,10 +191,6 @@ class Dictionary {
             this.bigMap();
         }
 
-        // if (this.pageNum == 2){
-        //     this.wo();
-        // }
-
         if (this.leftNum == 2){
             this.map();
         }
@@ -212,10 +198,6 @@ class Dictionary {
         if (this.rightNum == 2){
             this.wo();
         }
-
-        // if (this.pageNum == 3){
-        //     this.nihao();
-        // }
 
         if (this.leftNum == 3){
             this.map();
@@ -225,10 +207,6 @@ class Dictionary {
             this.nihao();
         }
 
-        // if (this.pageNum == 4){
-        //     this.xiexie();
-        // }
-
         if (this.leftNum == 4){
             this.map();
         }
@@ -236,10 +214,6 @@ class Dictionary {
         if (this.rightNum == 4){
             this.xiexie();
         }
-
-        // if (this.pageNum == 5){
-        //     this.zaijian();
-        // }
 
         if (this.leftNum == 5){
             this.map();
@@ -249,10 +223,6 @@ class Dictionary {
             this.zaijian();
         }
 
-        // if(this.pageNum == 6){
-        //     this.chifan();
-        // }
-
         if (this.leftNum == 6){
             this.map();
         }
@@ -261,10 +231,6 @@ class Dictionary {
             this.chifan();
         }
 
-        // if(this.pageNum == 7){
-        //     this.shuijiao();
-        // }
-
         if (this.leftNum == 7){
             this.map();
         }
@@ -272,10 +238,6 @@ class Dictionary {
         if (this.rightNum == 7){
             this.shuijiao();
         }
-
-        // if (this.pageNum == 8){
-        //     this.ending();
-        // }
 
         if (this.leftNum == 8){
             this.endingLeft();
@@ -304,7 +266,7 @@ class Dictionary {
         textFont("Courier New");
         textSize(25);
         fill(0);
-        text("Hi, my dear friend. Hope everyting\ngoes well.\n\nI'm Chloe from 21st century, a very\nlong time ago. I think you probably\nnever imagined life back then. You\nmay also know nothing about Chinese\nDialects.\n\nIf so, this dictionary will give you\na surprise. Given to the possibility\nof forgetting, I collected seven\nChinese Dialects and wrote this\ndictionary in 2024.\n\nHere, you can know the interesting\npronunciations of different Chinese\nDialects. You can also hear some\nstories of the native speakers.", 250, 180);
+        text("Hi, my dear friend. Hope everything\ngoes well.\n\nI'm Chloe from 21st century, a very\nlong time ago. I think you probably\nnever imagined life back then. You\nmay also know nothing about Chinese\nDialects.\n\nIf so, this dictionary will give you\na surprise. Given to the possibility\nof forgetting, I collected seven\nChinese Dialects and wrote this\ndictionary in 2024.\n\nHere, you can know the interesting\npronunciations of different Chinese\nDialects. You can also hear some\nstories of the native speakers.", 250, 180);
         // text("Their voices, memories and emotions\nhave withstood the test of time and,\nin a sense, constitute eternity.\n\nIf insterested, feel free to open\nthis old dictionary and have a\nwonderful tour!\n\nBest,\nChloe🥹", 900, 180);
     }
 
@@ -414,7 +376,6 @@ class Dictionary {
         if (this.playword == true && this.wordPlay ==1){
             if (this.indexWord == 0){
                 this.Zhoushan[this.wordNum].play();
-                //this.twinkle(this.indexWord);
             }
             if (this.indexWord == 1){
                 this.Guangzhou[this.wordNum].play();
@@ -743,17 +704,8 @@ class Dictionary {
                 this.changePage = false;
             }
 
-            // if (this.leftPage == true && xs >0){
-            //     this.flipPlay = 1;
-            // }
-
-            // if (xs == 0.9){
-            //     this.pageNum += 1;
-            // }
-
             if (this.flipPlay == 1) {
                 flipSound.play();
-                //this.pageNum += 1; //再斟酌一下下一页内容出现的时机
             }
 
             pop();
@@ -868,7 +820,6 @@ function mousePressed() {
     let distPrev = dist(mouseX, mouseY, 220, 810);
     if (distNext <= 20) {
         if (dictionary.rightNum < 8) {
-            //dictionary.no = false;
             dictionary.nextPage = true;
             dictionary.changePage = true;
         } else {
@@ -877,7 +828,6 @@ function mousePressed() {
     }
     if (distPrev <= 20) {
         if (dictionary.leftNum > 0) {
-            //dictionary.no = false;
             dictionary.prevPage = true;
             dictionary.changePage = true;
         } else {
@@ -914,7 +864,5 @@ function mousePressed() {
 
 
 //每次过中线都有翻页声
-//建一个array，通过index实现每页不一样
 //重新播放从头开始
-
 //里面调用if mouseIsPressed
