@@ -669,7 +669,7 @@ class Dictionary {
         }
 
         if (this.prevPage == true) {
-            this.pageNum -= 1;
+            //this.pageNum -= 1;
             this.playword = false;
             push();
             translate(this.width / 2 + 2 + this.x, this.y - 10);
