@@ -134,6 +134,7 @@ class Dictionary {
         this.storiesPlay = 0;
         this.index = 0;
         this.currentPlay = 0;
+        this.storyCount = 0;
         this.bigmap = false;
         this.show = false;
         this.showName = "";
@@ -263,7 +264,24 @@ class Dictionary {
             scale(5);
             if (this.storiesPlay == 1){
                 //this.sounds[this.index].currentTime = 0;
-                this.currentPlay = this.index;
+                // if (this.index = 0){
+                //     this.currentPlay = 0;
+                // }
+                // if (this.index = 1){
+                //     this.currentPlay = 1;
+                // }
+                // if (this.index = 2){
+                //     this.currentPlay = 2;
+                // }
+                // if (this.index = 3){
+                //     this.currentPlay = 3;
+                // }
+                // if (this.index = 4){
+                //     this.currentPlay = 4;
+                // }
+                // if (this.index = 5){
+                //     this.currentPlay = 5;
+                // }
                 this.sounds[this.index].play();
                 this.storiesPlay += 1;
             }
@@ -611,7 +629,7 @@ class Dictionary {
         }
 
         if (this.nextPage == true) {
-            this.pageNum += 1;
+            //this.pageNum += 1;
             this.playword = false;
             push();
             translate(this.width / 2 + 2 + this.x, this.y - 10);
@@ -632,9 +650,13 @@ class Dictionary {
             //     this.flipPlay = 1;
             // }
 
+            // if (xs == 0.9){
+            //     this.pageNum += 1;
+            // }
+
             if (this.flipPlay == 1) {
                 flipSound.play();
-                //this.pageNum += 1; //再斟酌一下下一页内容出现的时机
+                this.pageNum += 1; //再斟酌一下下一页内容出现的时机
             }
 
             pop();
@@ -661,12 +683,16 @@ class Dictionary {
 
             if (xs > 0) {
                 this.flipPlay += 1;
-                // flipSound.play();
+                //flipSound.play();
             }
+
+            // if (xs == -0.9){
+            //     this.pageNum += 1;
+            // }
 
             if (this.flipPlay == 1) {
                 flipSound.play();
-                //this.pageNum -= 1;
+                this.pageNum -= 1;
             }
 
             pop();
@@ -738,7 +764,7 @@ function mousePressed() {
     if (distNext <= 20) {
         if (dictionary.pageNum < 8) {
             //dictionary.no = false;
-            dictionary.nextPage = true;
+            dictionary.nextPage = true;;
         } else {
             dictionary.no = true;
         }
@@ -755,11 +781,14 @@ function mousePressed() {
     if (dictionary.bigmap == true){
         for (let i = 0; i < 6; i++){ //8
             if (dist(mouseX, mouseY, dictionary.cityX[i], dictionary.cityY[i]) <= 5){
-                //this.sounds[this.currentPlay].pause();
+                // if (i != dictionary.currentPlay && dictionary.storyCount > 1){
+                //     dictionary.sounds[dictionary.currentPlay].pause();
+                // }
                 dictionary.show = true;
                 dictionary.showName = dictionary.cities[i];
                 dictionary.index = i;
                 dictionary.storiesPlay = 1;
+                dictionary.storyCount += 1;
             }
         }
     }
@@ -777,8 +806,8 @@ function mousePressed() {
 }
 
 
-//how to turn a page while looking smoothly
 //每次过中线都有翻页声
 //建一个array，通过index实现每页不一样
 //重新播放从头开始
-//thanks the help of ...
+
+//里面调用if mouseIsPressed
